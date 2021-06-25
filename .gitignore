@@ -3,7 +3,7 @@
 
 ### 自行添加的规则 ###
 # 资源文件
-ignore_resource/
+ignore/
 
 ### Node ###
 # Logs
