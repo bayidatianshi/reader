@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>HTML基础</title>
+  <link rel="shortcut icon" href="https://developer.mozilla.org/static/img/favicon32.png">
+</head>
+<body>
+<button onclick="start()">named</button>
+<h1 id="student"></h1>
+
+
+
+<script type="text/javascript">
+var num = 100;
+let names = ['张三', '李四', '王五', '陈六', '曾七']
+function test() {
+    if(num < 0) {    //函数结束条件
+        clearTimeout(t);
+        return;
+    }
+    document.querySelector('#student').innerHTML = names[Math.floor(Math.random()*names.length)];
+    num--;
+    t = setTimeout("test()", 10); //单位是毫秒
+}
+function start() {
+    num = 100;
+    test();
+}
+
+let arr = [1, 2, 3];
+let vaild = arr.length && arr.every(x => x > 0);
+
+  // MDN的HTML教程：https://developer.mozilla.org/zh-CN/docs/Web/HTML
+  // MDN的HTML参考：https://developer.mozilla.org/zh-CN/docs/Web/HTML/Reference
+  /*
+    补充说明：
+      1.HTML 标签不区分大小写，标签里面的属性也不区分大小写(属性的值不受影响)，所以统一小写来避免问题
+      2.路径通过..返回上一级
+      3.语义化原则
+      4.空元素不用写闭标签，常见的有input、img、br、hr
+      5.大多数标签内(除了输入框和pre)的空格和换行会压缩成一个空格。如果想要保留空格和换行，请用&nbsp;和br，或者写在pre里面（用pre标签的话字体会变，记得改回来）
+      6.表格和表单涉及的东西很多，单纯使用原生的表格表单可能无法实现所需功能，推荐使用组件库的表单表单组件
+      7.如何制作快速加载的HTML页面：减少页面大小，减少文件数量，减少域名查找（资源放在统一域名），缓存重用内容，CSS代替图片，
+    
+    <head>中的标签：
+      <meta>标签：设置字符集、指定网页作者与描述（帮助搜索引擎优化）
+      <link>标签：设置网页图标、链接CSS资源
+        设置图标：<link rel="shortcut icon" href="https://developer.mozilla.org/static/img/favicon32.png">
+        链接CSS：<link rel="stylesheet" href="my-css-file.css">
+      <script>标签：链接JS资源，书写JS代码（但不推荐写在head里面，最好写在body结束前，保证元素加载完后再执行JS代码）
+
+    常用标签：
+    结构
+    <header>：页眉
+    <nav>：导航栏
+    <main>：主内容,主内容中还可以有各种子内容区段，可用<article>、<section> 和 <div> 等元素表示
+    <article> 包围的内容即一篇文章，与页面其它部分无关（比如一篇博文）。包含一些间接信息（术语条目、作者简介、相关链接，等等）。
+    <aside>：侧边栏，经常嵌套在 <main> 中
+    <footer>：页脚
+    块级&行内：<div><span></span></div>
+    <br> 和 <hr>：换行与水平分割线
+
+    文本
+    h1-6：标题
+    p：段落
+    ul\ol > li ：列表
+    strong：加粗强调
+    a：超链接
+        文字链接：<a href="https://www.mozilla.org/zh-CN/">Mozilla 主页</a>
+        图片链接：<a href="https://www.mozilla.org/zh-CN/"><img src="mozilla-image.png" alt="图不存在"> </a>
+        下载链接：需要添加download属性
+            <a href="https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=zh-CN"
+               download="firefox-latest-64bit-installer.exe">
+              下载最新的 Firefox 中文版 - Windows（64位）
+            </a>
+    sup\sub：上标和下标
+      <p>x<sup>2</sup> 的值为 9</p>
+      <p>咖啡因的化学方程式是 C<sub>8</sub>H<sub>10</sub>N<sub>4</sub>O<sub>2</sub>。</p>
+    代码块&代码：<pre><code>let a = 0;</code></pre>
+
+    表格:
+      基础用法：结构（头身尾、列行单元格） + 内容（利用DOM操作变更） + 样式（利用CSS优化）
+      CSS样式优化：https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Styling_tables
+      <table>
+        <caption>表格标题</caption>
+        <thead>
+          <tr>
+            <th>列标题：thead>tr>th</th>
+            <th>列标题</th>
+            <th>列标题</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>行标题：tbody>tr>th</th>
+            <td>表格样式需要通过CSS优化：https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Styling_tables</td>
+            <td>表格默认样式无边框</td>
+          </tr>
+          <tr>
+            <th>行标题</th>
+            <td rowspan="2">rowspan跨行</td>
+            <td>表格默认样式间距拥挤</td>
+          </tr>
+          <tr>
+            <th>行标题</th>
+            <!-- <td>被跨行单元格占据</td> -->
+            <td>单元格最大值决定宽高</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>尾标题：tfoot>tr>th</th>
+            <td colspan="2" style="text-align: center;">colspan跨列（可以通过居中文字表现出来）</td>
+            <!-- <td>被跨列单元格占据</td> -->
+          </tr>
+        </tfoot>
+      </table>
+
+    表单：
+      用法：结构（分区分组、标签与表单项） + 部件（input类、非input类、按钮） + 属性（name、disabled、autofocus、placeholder等） + 功能完善与优化(DOM操作)
+        <form action="formHandle.html" method="post">
+          <section>
+              <h2>section分区：子表单一（input部件）</h2>
+              <div>
+                <label for="name">input默认输入框type="text"</label>
+                <input type="text" id="name" name="user_name"></input>
+              </div>
+              <div>
+                <label for="pwd">input密码输入框type="password"</label>
+                <input type="password" id="pwd" name="user_password">
+              </div>
+              <div>
+                <label for="mail">input邮箱输入框type="email"</label>
+                <input type="email" id="mail" name="user_email">
+              </div>
+              <div>
+                <label for="number">input数值输入框type="number"</label>
+                <input type="number" id="number" name="user_number" min="1" max="10" step="2">
+              </div>
+              <div>
+                <label for="range">input滑块输入框type="range"</label>
+                <input type="range" name="beans" id="beans" min="0" max="500" step="10">
+              </div>
+              <div>
+                <label for="tel">input电话输入框type="tel"</label>
+                <input type="tel" id="tel" name="user_tel">
+              </div>
+              <div>
+                <label for="url">inputURL输入框type="url"</label>
+                <input type="url" id="url" name="user_url">
+              </div>
+              <div>
+                <label for="file">input文件输入框type="file"</label>
+                <input type="file" id="file" name="user_file" accept="image/*" multiple>
+              </div>
+              <div>
+                <label for="color">input拾色器type="color"</label>
+                <input type="color" id="color" name="user_color">
+              </div>
+              <div>
+                <label for="hidden">input隐藏内容type="hidden"</label>
+                <input type="hidden" id="hidden" name="user_hidden">
+              </div>
+              <div>
+                <label for="image">input图片按钮type="image"</label>
+                <input type="image" id="image" alt="Click me!" src="https://developer.mozilla.org/static/img/favicon32.png" width="80" height="30" />
+              </div>
+              <div>
+                <label for="date">input日期输入框type="date"</label>
+                <input type="date" id="date" name="user_date" min="2013-08-10" max="2013-08-20" value="2013-08-15">
+              </div>
+              <div>
+                <label for="search">input搜索输入框type="search"(附加datalist候选集)</label>
+                <input type="search" id="search" name="user_search" list="mySuggestion">
+                <datalist id="mySuggestion">
+                  <option>Apple</option>
+                  <option>Banana</option>
+                  <option>Blackberry</option>
+                  <option>Blueberry</option>
+                  <option>Lemon</option>
+                  <option>Lychee</option>
+                  <option>Peach</option>
+                  <option>Pear</option>
+                </datalist>
+              </div>
+             <fieldset>
+                <legend>可以用fieldset分组</legend>
+                <span>
+                  <input type="radio" name="radio_name" id="radio_1" value="radio_value_1">
+                  <label for="radio_1">input单选框type="radio"</label>
+                </span>
+                <span>
+                  <input type="radio" name="radio_name" id="radio_2" value="radio_value_2">
+                  <label for="radio_2">同组的name属性保持一致即可正常使用单选功能</label>
+                </span>
+                <span>
+                  <input type="radio" checked name="radio_name" id="radio_3" value="radio_value_3">
+                  <label for="radio_3">checked属性默认选中</label>
+                </span>
+              </fieldset>
+              <div>
+                <div>也可以用div分组</div>
+                <span>
+                  <input type="checkbox" id="checkbox_1" name="checkbox_name_1" value="checkbox_value_1">
+                  <label for="checkbox_1">input复选框type="checkbox"</label>
+                </span>
+                <span>
+                  <input type="checkbox" id="checkbox_2" name="checkbox_name_2" value="checkbox_value_2">
+                  <label for="checkbox_2">name一致只会重复传参，需要利用DOM操作整合成数组来实现复选功能</label>
+                </span>
+                <span>
+                  <input type="checkbox" checked id="checkbox_3" name="checkbox_name_3" value="checkbox_value_3">
+                  <label for="checkbox_3">checked属性默认选中</label>
+                </span>
+              </div>
+          </section>
+          <section>
+              <h2>section分区：子表单二（非input部件）</h2>
+              <div>
+                <label for="card">select下拉框</label>
+                <select id="groups" name="groups">
+                  <optgroup label="fruits">
+                    <option value="banana">Banana</option>
+                    <option selected>selected默认选中</option>
+                    <option>value不写就默认与label同值</option>
+                  </optgroup>
+                  <optgroup label="vegetables">
+                    <option>Carrot</option>
+                    <option>Eggplant</option>
+                    <option>Potato</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div>
+                <label for="msg">textarea文本框</label>
+                <textarea id="msg" name="user_msg" cols="30" rows="3"></textarea>
+              </div>
+              <div>
+                <label for="progress">progress进度条</label>
+                <progress max="100" id="progress" value="75">75/100</progress>
+              </div>
+              <div>
+                <label for="meter">meter仪表</label>
+                <meter min="0" id="meter" max="100" value="75" low="33" high="66" optimum="50">75</meter>
+              </div>
+              <div class="button">
+                <button type="submit">type="submit"保存</button>
+                <button type="reset">type="reset"重置</button>
+              </div>
+          </section>
+        </form>
+      DOM操作复选框：
+        let checkList = document.querySelectorAll('input[type="checkbox"]'); // 获取复选框
+        let curValue = document.querySelector('input[name="checkbox_name_1"]').value; // 获取复选框的值
+        document.querySelector('input[name="checkbox_name_1"]').checked = true; // 获取复选框的选中状态
+      表单提交：
+      现代HTML表单大多只是用来收集用户的输入。 当用户尝试发送数据时，取消默认的提交跳转，通过异步地传输数据，只更新UI中需要更改的部分。
+      表单发送文件：
+      参考exsql的用法
+      自定义表单组件：
+      https://developer.mozilla.org/zh-CN/docs/Learn/Forms/How_to_build_custom_form_controls
+      表单安全问题：
+      https://developer.mozilla.org/zh-CN/docs/Learn/Forms/Sending_and_retrieving_form_data#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98
+      表单验证：
+      https://developer.mozilla.org/zh-CN/docs/Learn/Forms/Form_validation
+      表单样式优化：
+      https://developer.mozilla.org/zh-CN/docs/Learn/Forms#%E8%A1%A8%E5%8D%95%E6%A0%B7%E5%BC%8F%E6%8C%87%E5%8D%97
+    
+    多媒体
+    图片：img \ svg （复杂精密的图像还是用位图比较方便）
+      图片搭配说明文字（用 figure / figcaption 代替 div / span）
+      <figure>
+        <img src="https://developer.mozilla.org/static/img/favicon32.png">
+        <figcaption>说明文字</figcaption>
+      </figure>
+      矢量图片svg，可以先矢量图片编辑器设计（例如：https://editor.method.ac/），然后保存图片，复制源代码
+        <img src="equilateral.svg" />
+        或者
+        <svg version="1.1"
+             baseProfile="full"
+             width="300" height="200"
+             xmlns="http://www.w3.org/2000/svg">
+          <rect width="100%" height="100%" fill="black" />
+          <circle cx="150" cy="100" r="90" fill="blue" />
+        </svg>
+      响应式图片（不同分辨率都能显示合适的图）：https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
+    视频与音频：https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content
+    视频：video
+    音频：audio
+    嵌入网页：<iframe>，注意版权问题。https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Other_embedding_technologies
+      <p>vue3教程</p>
+      <iframe src="https://v3.cn.vuejs.org/guide/introduction.html" width="50%" height="700" sandbox> </iframe>
+
+
+
+
+  */
+</script>
+</body>
+</html>

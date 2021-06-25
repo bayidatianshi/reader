@@ -119,6 +119,8 @@ github
 	git pull origin master  
 	git pull origin dev
 
+- 更多功能：issue、
+
 - 使用**github desktop**可以不用写命令行，更加直观方便
 
 

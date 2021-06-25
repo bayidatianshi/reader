@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>vue3基础</title>
+  <script src="https://unpkg.com/vue@next"></script>
+  <!-- iview组件库 -->
+  <link rel="stylesheet" type="text/css" href="http://unpkg.com/view-design/dist/styles/iview.css">
+  <script type="text/javascript" src="http://unpkg.com/view-design/dist/iview.min.js"></script>
+  <!-- Vue 没有内置支持防抖和节流，但可以使用 Lodash 等库来实现。 -->
+  <script src="https://unpkg.com/lodash@4.17.20/lodash.min.js"></script>
+  <!-- axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+  <style type="text/css">
+    #demo>div{
+      margin: 10px 0;
+      padding: 10px 6px;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <Button>Default</Button>
+  <div id="demo">
+    声明式渲染与响应式变化: {{ counter }}
+    <div :title="title">
+      <span>{{ text }}</span>
+      <button @click="reverseText">反转文字</button>
+    </div>
+    
+    <div>
+      <span>{{ formText }}</span>
+      <input v-model="formText" />
+    </div>
+    
+    <div>
+      <span v-if="seen">{{ seenText }}</span>
+      <button @click="seen = !seen">{{ seen ? '隐藏' : '显示' }}</button>
+    </div>
+
+    <div>
+      <ul>
+        <li v-for="item in list">{{ item.text }}</li>
+      </ul>
+    </div>
+
+    <div>
+      <span v-html="htmlText"></span>
+    </div>
+
+    <div>
+      <button @click="debouncedLodash">通过Lodash在生命周期里给函数配置防抖功能</button>
+      <span>函数触发：{{LodashCounter}}</span>
+    </div>
+
+    <div>
+      <span>计算属性适合响应式数据的复杂逻辑，并且只在相关响应式依赖发生改变时才会重新求值：{{computedText}}</span>
+    </div>
+
+    <div>
+      <span>侦听器适合在响应式数据发生变化时，触发复杂操作（异步或开销大的操作）</span>
+      <br />
+      Ask an question:<input v-model="watchQuestion" />
+      Answer:<span>{{watchAnswer}}</span>
+    </div>
+
+    <div  :style="{ fontSize: componenFontSize + 'em' }">
+      <button-counter :component-text="componentText" @enlarge-text="onEnlargeText">slot分发内容</button-counter>
+    </div>
+
+  </div>
+
+<script type="text/javascript">
+
+/*教程链接：https://v3.cn.vuejs.org/guide/introduction.html */
+/*简易demo：引入CDN、书写页面元素、定义vue对象并挂载到元素*/
+/*简写：v-bind:title(:title)、v-on:click(@click)*/
+/*
+补充说明：
+  1、有些元素，诸如 <ul>、<table> 和 <select>，对于哪些元素可以出现在其内部是有严格限制的。这会导致遇到一些问题。例如
+    <table> <blog-post-row></blog-post-row> </table>
+    这个自定义组件 <blog-post-row> 会被作为无效的内容提升到外部，并导致最终渲染结果出错。我们可以使用特殊的 v-is 指令作为一个变通的办法：
+    <table> <tr v-is="'blog-post-row'"></tr> </table>
+  2、绑定字符串常量需要加引号，例如:label="1"会解释为数字，:disabled="true"会解释为布尔，需要:label="'1'"才解释为字符串
+*/
+  const demo = {
+    data() {
+      return {
+        counter: 0,
+        title: '数据可绑定到：文本插值（通过双括号）、元素属性（通过v指令）',
+        text: 'v-on：监听事件改变数据',
+        formText: 'v-model：指令实现表单输入与应用状态的双向绑定',
+        seen: true,
+        seenText: 'v-if：条件渲染。',
+        list: [ { text: 'v-for：' }, { text: '列表渲染' } ],
+        instaneText: '可以通过应用实例访问相关属性或方法，特别是内置的',
+        htmlText: '<span>v-html：显示原始HTML（不可以用文本插值）<span>',
+        // modifier: '修饰符指出一个指令应该以特殊方式绑定',
+        LodashCounter: 0,
+        watchQuestion: '',
+        watchAnswer: 'Please an question with ?',
+        componentText: '组件：props和$emit实现父子组件的数据传递',
+        componenFontSize: 1
+      }
+    },
+    computed: {
+      computedText() {
+        if (this.seen) {
+          return this.counter % 3 ? 'counter不为3的倍数' : 'counter为3的倍数';
+        } // 进阶：设置setter和getter
+      }
+    },
+    watch: {
+      watchQuestion(newValue, oldValue) {
+        if(newValue.indexOf('?') > -1) {
+          this.getAnswer();
+        }
+      }
+    },
+    // 生命周期
+    created() {
+      this.debouncedLodash = _.debounce(this.Lodash, 1000); // 添加防抖，需引用Lodash插件
+    },
+    mounted() {
+      setInterval( () => { this.counter++ }, 1000 );
+    },
+    unmounted() {
+      this.debouncedLodash.cancel() // 移除防抖
+    },
+    methods: {
+      reverseText() {
+        this.text = this.text.split('').reverse().join('');
+      },
+      Lodash() {
+        this.LodashCounter++;
+      },
+      getAnswer() {
+        this.watchAnswer = 'Thinking...';
+        axios.get('https://yesno.wtf/api')
+        .then(res => {
+          this.watchAnswer = res.data.answer;
+        })
+        .catch(err => {
+          this.watchAnswer = 'Error!'
+        })
+      },
+      onEnlargeText(enlargeAmount) {
+        this.componenFontSize += enlargeAmount
+      }
+    }
+  }
+
+  const app = Vue.createApp(demo);
+  // 组件
+  app.component('button-counter', {
+    props: { // 如果子组件内用驼峰，父组件传参时需要用短横线，因为HTML标签和属性不区分大小写
+      componentText: { type: String, require: false, default: '默认值'}
+    },
+    emits: ['enlarge-text'],
+    data() {
+      return {
+        enlargeSize: 0.1
+      }
+    },
+    methods: {
+      emitEnlargeText() {
+        this.$emit('enlarge-text', this.enlargeSize);
+      }
+    },
+    template: 
+      `
+      <span>{{ componentText }}</span>
+      <button @click="emitEnlargeText">Enlarge text</button>
+      <br />
+      <strong style="color: red"><slot></slot></strong>
+      `
+  })
+
+  const appInstane = app.mount('#demo');
+  console.log(appInstane.instaneText); // 访问方法：appInstane.reverseText()，可以在控制台查看效果
+  // const appInstane = Vue.createApp(demo).mount('#demo');
+
+</script>
+</body>
+</html>
