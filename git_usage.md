@@ -119,6 +119,17 @@ github
 	git pull origin master  
 	git pull origin dev
 
+- 冲突  
+	本地库的文件A修改了但未提交到远程库，同时其他人把远程库的文件A修改了，然后提交本地库的文件A就会发生冲突  
+	解决：在提交之前先pull最新版的远程库，如果有冲突就合并冲突的代码，然后再提交。
+
+- 只下载某个文件夹  
+	网页上只能下载整个下项目，如果只想要下载某个文件夹，可以  
+	拷贝浏览器里的网址 https://github.com/XXX/xxxxx/tree/master/folder1/folder2  
+	把上述语句里的tree/master换成trunk  
+	借用SVN，右键SVN Checkout到指定文件夹，输入转换后的地址，点击OK即可
+	
+
 - 更多功能：issue、
 
 - 使用**github desktop**可以不用写命令行，更加直观方便
