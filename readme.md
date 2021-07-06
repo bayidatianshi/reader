@@ -1,10 +1,15 @@
-## markdownPad ##
-
+## markdownPad2 ##
+- 设置：工具-选项-markdown-markdown处理器-commonMark
 - 换行(`空一行`, `行尾双空格`)
 - 标题 1, 2, 3 (`Ctrl+1`, `Ctrl+2`, `Ctrl+3`)
 - 列表 (`Ctrl+U`)
 - 引用 (`Ctrl+Q`)
-- 代码块 (`Ctrl+K`, `TAB`, `反引号`)
+- 单行代码 (`Ctrl+K`, `TAB`, `反引号`)
+- 代码块(`三个反引号+类型`)
+```markup
+文本类型用markup
+反引号前不要有空格
+```
 - <span style="color: #ff0000;border: 1px solid blue">支持HTML + CSS写法(可实现样式、图片等功能)</span>
 
 ## 版本更新 ##

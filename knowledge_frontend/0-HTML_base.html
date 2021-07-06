@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>HTML基础</title>
-  <link rel="shortcut icon" href="https://developer.mozilla.org/static/img/favicon32.png">
+  <link rel="shortcut icon" href="https://developer.mozilla.org/static/media/language.9e1dde1b.svg">
 </head>
 <body>
 <button onclick="start()">named</button>
@@ -15,7 +15,7 @@
 var num = 100;
 let names = ['张三', '李四', '王五', '陈六', '曾七']
 function test() {
-    if(num < 0) {    //函数结束条件
+    if(num < 0) { //函数结束条件
         clearTimeout(t);
         return;
     }
@@ -46,7 +46,7 @@ let vaild = arr.length && arr.every(x => x > 0);
     <head>中的标签：
       <meta>标签：设置字符集、指定网页作者与描述（帮助搜索引擎优化）
       <link>标签：设置网页图标、链接CSS资源
-        设置图标：<link rel="shortcut icon" href="https://developer.mozilla.org/static/img/favicon32.png">
+        设置图标：<link rel="shortcut icon" href="https://developer.mozilla.org/static/media/language.9e1dde1b.svg">
         链接CSS：<link rel="stylesheet" href="my-css-file.css">
       <script>标签：链接JS资源，书写JS代码（但不推荐写在head里面，最好写在body结束前，保证元素加载完后再执行JS代码）
 
@@ -164,7 +164,7 @@ let vaild = arr.length && arr.every(x => x > 0);
               </div>
               <div>
                 <label for="image">input图片按钮type="image"</label>
-                <input type="image" id="image" alt="Click me!" src="https://developer.mozilla.org/static/img/favicon32.png" width="80" height="30" />
+                <input type="image" id="image" alt="Click me!" src="https://developer.mozilla.org/static/media/language.9e1dde1b.svg" width="80" height="30" />
               </div>
               <div>
                 <label for="date">input日期输入框type="date"</label>
@@ -271,7 +271,7 @@ let vaild = arr.length && arr.every(x => x > 0);
     图片：img \ svg （复杂精密的图像还是用位图比较方便）
       图片搭配说明文字（用 figure / figcaption 代替 div / span）
       <figure>
-        <img src="https://developer.mozilla.org/static/img/favicon32.png">
+        <img src="https://developer.mozilla.org/static/media/language.9e1dde1b.svg">
         <figcaption>说明文字</figcaption>
       </figure>
       矢量图片svg，可以先矢量图片编辑器设计（例如：https://editor.method.ac/），然后保存图片，复制源代码
@@ -291,8 +291,6 @@ let vaild = arr.length && arr.every(x => x > 0);
     嵌入网页：<iframe>，注意版权问题。https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Other_embedding_technologies
       <p>vue3教程</p>
       <iframe src="https://v3.cn.vuejs.org/guide/introduction.html" width="50%" height="700" sandbox> </iframe>
-
-
 
 
   */
