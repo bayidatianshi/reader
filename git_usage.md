@@ -136,7 +136,15 @@ github
 
 
 gitee
+
+- 注册登录
+- 设置-SSH公钥-标题自定义，填写C:\Users\jack\.ssh\id_rsa.pub的内容
+- 先有远程库，再克隆到本地库  
+	git clone git@gitee.com:gitee账号名/gitee仓库项目名.git
 	
 
-
+### TortoiseGit ###
+- 代替命令行操作
+- 文本对比
+- 冲突处理
 

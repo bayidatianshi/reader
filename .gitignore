@@ -5,6 +5,9 @@
 # 资源文件
 ignore/
 
+# 草稿
+test/
+
 ### Node ###
 # Logs
 logs
