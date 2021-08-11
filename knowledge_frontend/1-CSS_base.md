@@ -94,7 +94,7 @@ div {
 
 ### 背景 ###
 
-- 简写：`background: url(balloons.jpg) 0 0/cover local no-repeat;`
+- `background: url(balloons.jpg) 0 0/cover local no-repeat; // 常用简写`
 - `background-color: red; // 设置背景色`
 - `background-image: url(balloons.jpg); // 还可以设置渐变 background-image: linear-gradient(90deg, red 50%, blue 100%);`
 - `background-repeat: no-repeat; // 通常不需要重复平铺图片`
@@ -107,7 +107,7 @@ div {
 
 - 注意：不要给边距设置百分数，因为表现难以预测
 - 绝对长度单位：px
-- 相对长度单位：em、rem（相对于自身、<html>字体大小）；vw、vh（视窗宽度、高度的1%，会跟随视窗大小变化）
+- 相对长度单位：em、rem（相对于自身、html标签字体大小）；vw、vh（视窗宽度、高度的1%，会跟随视窗大小变化）
 - 函数：width: calc(20% + 100px);
 - 颜色：red、#ff0000、rgba(红,绿,蓝,透明度)、hsla(色相,饱和度,亮度,透明度)
 - 限制：min-和max-尺寸，在避免缺失或溢出的同时处理变化容量的内容
@@ -121,6 +121,7 @@ div {
 ### 其他 ###
 
 - [处理不同方向的文本](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Handling_different_text_directions)
+- [换行：word-break、word-wrap、white-space](https://www.cnblogs.com/dfyg-xiaoxiao/p/9640422.html)
 - [样式化表格](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Styling_tables)
 - [CSS自定义属性](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties)
 - CSS 扩展语言：less \ Sass

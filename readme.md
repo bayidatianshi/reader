@@ -1,11 +1,12 @@
-## markdownPad2 ##
-- 设置：工具-选项-markdown-markdown处理器-commonMark
+## VSCODE编辑MarkDown ##
+- MarkDown编辑优化拓展：MarkDown All in One
+- Markdown的Github风格拓展：Markdown Preview Github Styling
 - 换行(`空一行`, `行尾双空格`)
-- 标题 1, 2, 3 (`Ctrl+1`, `Ctrl+2`, `Ctrl+3`)
-- 列表 (`Ctrl+U`,`-`)
+- 标题 1, 2, 3 (`#`, `##`, `###`)
+- 列表 (`-`)
 - 多级列表（在列表符号前面加tab）
-- 引用 (`Ctrl+Q`)
-- 单行代码 (`Ctrl+K`, `TAB`, `反引号`)
+- 引用 (`>`)
+- 单行代码 (`反引号`)
 - 代码块(`三个反引号+类型`)
 ```markup
 文本类型用markup
