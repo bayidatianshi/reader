@@ -2,10 +2,8 @@
 <html>
 <head>
   <title>vue3基础</title>
-  <script src="https://unpkg.com/vue@next"></script>
-  <!-- iview组件库 -->
-  <link rel="stylesheet" type="text/css" href="http://unpkg.com/view-design/dist/styles/iview.css">
-  <script type="text/javascript" src="http://unpkg.com/view-design/dist/iview.min.js"></script>
+  <!-- vue -->
+  <script src="https://unpkg.com/vue@3.2.0"></script>
   <!-- Vue 没有内置支持防抖和节流，但可以使用 Lodash 等库来实现。 -->
   <script src="https://unpkg.com/lodash@4.17.20/lodash.min.js"></script>
   <!-- axios -->
@@ -19,11 +17,11 @@
   </style>
 </head>
 <body>
-  <Button>Default</Button>
   <div id="demo">
     声明式渲染与响应式变化: {{ counter }}
     <div :title="title">
       <span>{{ text }}</span>
+      <span>{{ text2 }}</span>
       <button @click="reverseText">反转文字</button>
     </div>
     

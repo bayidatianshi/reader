@@ -24,6 +24,9 @@ windows
 
 ### 基础用法 ###
 
+- 问题：
+  - WINDOWS下会出现`LF will be replaced by CRLF` 的 警告：配置`git config --global core.autocrlf true`，[参考](https://www.jianshu.com/p/450cd21b36a4)
+
 - 调出命令行  
 	项目根目录右键
 	git bash here
