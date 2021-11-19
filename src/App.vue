@@ -1,19 +1,23 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- 路由入口：使用 router-link 组件进行导航，通过传递 `to` 来指定链接 -->
+    <Button><router-link to="/">Go to Index</router-link></Button>
+    &nbsp;&nbsp;&nbsp;
+    <router-link to="/about">Go to About</router-link>
+    <!-- 路由出口： 使用 router-view 组件进行展示，路由匹配到的组件将渲染在这里 -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  mounted() {
+    console.log(this.$store.state.count)
+    this.$store.commit('increment')
+    console.log(this.$store.state.count)
+  },
+};
 </script>
 
 <style>
